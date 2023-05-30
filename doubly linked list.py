@@ -41,13 +41,19 @@ class LinkedList:
     def insert_at(self, idx, value):
         current = self.head
         new_node = Node(value)
+
+        if idx == 0:
+            new_node.next = current
+            current.prev = new_node
+            self.head = new_node
         
-        for _ in range(idx-1):
-            current = current.next
-        new_node.next = current.next
-        current.next.prev = new_node
-        current.next = new_node
-        new_node.prev = current
+        else:
+            for _ in range(idx-1):
+                current = current.next
+            new_node.next = current.next
+            current.next.prev = new_node
+            current.next = new_node
+            new_node.prev = current
 
     # LinkedList에서 인덱스 값 삭제
     def remove_at(self, idx):
@@ -93,5 +99,9 @@ print()
 print('index 3에 위치한 값 삭제')
 ll.remove_at(0)
 
+print(ll.output())
+print()
+
+ll.insert_at(0, '안녕')
 print(ll.output())
 print()
